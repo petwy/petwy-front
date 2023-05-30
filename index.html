@@ -1,105 +1,41 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>petwy-home</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css">
-    <script src="https://use.fontawesome.com/releases/vVERSION/js/all.js" data-mutate-approach="sync"></script>
-</head>
-<body>
-<nav>
-    <div class="nav-container">
-        <div class="logo">
-            <img src="ruta-del-logotipo.png" alt="Logotipo">
-            <ul>
-                <li>¿Quienes somos?</li>
-            </ul>
-        </div>
-        <div class="dropdown">
-            <ul>
-                <li>Inicia Sesión</li>
-                <li class="dropdown-register"><span class="paw-solid"></span> Regístrate con nosotros
-                    <div class="dropdown-register-content">
-                        <p><a href="#seccion-ingresa">Ingresa con tu mascota</a></p>
-                        <p><a href="#seccion-veterinarios">Veterinarios</a></p>
-                    </div>
-                </li>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="petwy app" />
+    <link href="./dist/index.css" rel="stylesheet" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="/manifest.json" />
+    <!--
+      Notice the use of  in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
 
-            </ul>
+      Unlike "/favicon.ico" or "favicon.ico", "/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>petwy</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="module" src="./src/index.tsx"></script>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
 
-        </div>
-    </div>
-</nav>
-<section>
-    <div class="section-container">
-        <div class="section-title">
-            <h1>Peludos mejor cuidados, vacunas al día y toda una suite para programar sus visitas al veterinario</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima mollitia nesciunt nostrum quibusdam
-                temporibus! Architecto, at ducimus eius, eligendi incidunt, ipsam labore minus molestiae neque nostrum
-                porro
-                sequi sit vero.</p>
-            <button class="section-button-start">Comienza</button>
-        </div>
-        <div class="section-img">
-            <img src="assets/petwi-section-1.jpg" alt="paws"/>
-        </div>
-    </div>
-    <div class="section-container">
-        <div class="section-img">
-            <img src="assets/petwi-section-1.jpg" alt="paws"/>
-        </div>
-        <div class="section-title">
-            <h1>Damos lo mejor para cuidarte</h1>
-            <div>
-                <h2>Su salud es lo más importante</h2>
-                <p>Mantén sus cuidados al día con nuestro gestor de vacunas y medicinas.</p>
-            </div>
-            <div>
-                <h2>Sincroniza con Veterinarios</h2>
-                <p>Conecta, tu veterinario podrá conocer el historial de tu mascota y podrás tener un mejor
-                    diagnóstico en sus visitas.</p>
-            </div>
-            <div>
-                <h2>¿Se van de paseo?</h2>
-                <p>Recopila toda la información necesaria para viajar. Porque sabemos lo difícil de estos trámites,
-                    te simplificamos la vida.</p>
-            </div>
-            <div>
-                <h2>Geolocaliza </h2>
-                <p>Geolocaliza los mejores lugares para tus peludos: parques, farmacias, veterinarias. Siempre te ayudaremos
-                    a encontrar el lugar más cercano.</p>
-            </div>
-        </div>
-    </div>
-</section>
-<footer>
-    <div>
-        <div class="footer-container">
-            <div class="footer-container-section">
-                <h2 class="footer-container-title">PRODUCTO</h2>
-                <ul>
-                    <li>Cuidados de mascotas</li>
-                    <li>Servicios a Veterinarias</li>
-                </ul>
-            </div>
-            <div class="footer-container-section">
-                <h2 class="footer-container-title">¿Quienes Somos?</h2>
-                <ul>
-                    <li>Nuestra Misión</li>
-                    <li>¿Cómo vemos las cosas?</li>
-                </ul>
-            </div>
-            <div class="footer-container-section">
-                <h2 class="footer-container-title">AYUDA</h2>
-            </div>
-        </div>
-        <p>petwy &copy; 2023, Chile</p>
-    </div>
-</footer>
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
 
-</body>
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
 </html>
-
