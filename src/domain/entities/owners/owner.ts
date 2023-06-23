@@ -1,4 +1,4 @@
-import { IPet } from '../IPet'
+import { IPet } from '../pets/IPet'
 import { Address } from '../address'
 import { Phone } from '../phone'
 
@@ -11,7 +11,6 @@ export interface IOwner {
   phone: Phone
   pets: IPet[]
 }
-
 export interface Identification {
   DNI: {
     DNI?: string

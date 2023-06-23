@@ -1,4 +1,4 @@
-export type Response<T = unknown> = {
+export type Response<T> = {
   data: T
   status: number
 }

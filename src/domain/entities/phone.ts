@@ -1,4 +1,4 @@
 export interface Phone {
-  code: number
-  phone: number
+  code: string
+  number: string
 }

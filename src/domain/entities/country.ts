@@ -1,1 +1,5 @@
-export const countries = ['Chile', 'Argentina', 'Colombia', 'Perú', 'Uruguay']
+export type Country = {
+  code: string
+  value: string
+  label: string
+}

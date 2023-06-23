@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse, AxiosStatic } from 'axios'
+import axios, { AxiosResponse, AxiosStatic } from 'axios'
 import * as rax from 'retry-axios'
 import { Api, Response } from '../../../domain/repository/api'
 import { HTTPOption } from './option'
@@ -17,19 +17,10 @@ export class Http<T> implements Api<T> {
       instance: axios,
       retry: HTTPOptions?.retry || config.request.retries,
       backoffType: config.request.backoffType as 'linear' | 'static' | 'exponential',
-      shouldRetry: function enforceRetriesStopAtTimeout(err: AxiosError) {
-        const raxConfig = rax.getConfig(err)
-        return rax.shouldRetryRequest(err)
-      },
     }
     rax.attach(this.axios)
-    this.axios.interceptors.response.use(
-      (response: AxiosResponse) => response,
-      (error: AxiosError) => {
-        return error
-      }
-    )
   }
+
   get<T>(url: string, headers: Record<string, string>, token: string): Promise<Response<T>> {
     this.setToken(token, headers)
     return this.axios
@@ -38,10 +29,12 @@ export class Http<T> implements Api<T> {
         timeout: config.request.timeout,
       })
       .then((response: AxiosResponse) => {
+        console.log(response)
         const { status, data } = response
         return { status, data }
       })
       .catch((err) => {
+        console.log(err)
         throw err
       })
   }

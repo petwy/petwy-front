@@ -1,8 +1,10 @@
 const config = {
   api: {
     core: {
-      token: process.env.PETWY_TOKEN || '',
-      url: process.env.PETWY_CORE_URL,
+      key: import.meta.env.VITE_API_KEY || '',
+      token: import.meta.env.VITE_PETWY_TOKEN || '',
+      url: import.meta.env.VITE_PETWY_CORE_URL,
+      environment: import.meta.env.NODE_ENV,
     },
   },
   request: {

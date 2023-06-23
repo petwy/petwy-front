@@ -1,5 +1,5 @@
-import { Owner } from '@/domain/entities/owners/owner'
+import { IOwner } from '../entities/owners/owner'
 
 export interface OwnerCrud {
-  create(o: Owner): Promise<Owner>
+  create(o: IOwner): Promise<IOwner>
 }
