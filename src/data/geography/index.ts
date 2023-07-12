@@ -1,9 +1,9 @@
 /*
  * This is a hardcoded references to regions in Chile
  * */
-import { Country } from '../../domain/entities/country'
+import { Option } from '../../domain/interfaces/select'
 
-export const countries: Country[] = [
+export const countries: Array<Option> = [
   { code: 'CHL', value: 'CHL', label: 'Chile' },
   { code: 'ARG', value: 'ARG', label: 'Argentina' },
   { code: 'BOL', value: 'BOL', label: 'Bolivia' },

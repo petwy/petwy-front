@@ -13,8 +13,8 @@ export const SwitchField = (props: SwitchProps): JSX.Element => {
   }
   return (
     <Switch
-      id={'sterilised'}
-      name={'sterilised'}
+      id={name}
+      name={name}
       checked={selected}
       onChange={handleSelect}
       className={`${selected ? 'bg-success' : 'bg-gray-light'} 

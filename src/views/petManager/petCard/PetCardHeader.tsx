@@ -15,7 +15,7 @@ export const PetCardHeader = (props: PetCardHeaderProps): JSX.Element => {
       <div className={'flex flex-row gap-2'}>
         {isSterilised ? (
           <Tooltip content={'Tu mascota está esterilizada'}>
-            <IconSterilisedFilled size={styles.icon.size.sm} color={'main-light'} />
+            <IconSterilisedFilled size={styles.icon.size.sm} color={'success'} />
           </Tooltip>
         ) : null}
         {isChipped ? (

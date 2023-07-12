@@ -15,12 +15,12 @@ import { PetDimensionSection } from './sections/PetDimensionSection'
 import { PetOthersSection } from './sections/PetOthersSection'
 
 export const PetRecord = (): JSX.Element => {
+  const { pet_id } = useParams()
   const dispatch = useDispatch<AppDispatch>()
   const state = useSelector<AppState>((state: AppState) => state)
   const { petState } = state as AppState
-  const btnStyle = `${styles.button.shape.rounded} ${styles.button.size.wide} ${styles.button.color.dark}`
-  const { pet_id } = useParams()
   const { pet } = petState as PetState
+  const btnStyle = `${styles.button.shape.rounded} ${styles.button.size.wide} ${styles.button.color.dark}`
 
   useEffect(() => {
     if (pet_id !== undefined) {
@@ -29,7 +29,7 @@ export const PetRecord = (): JSX.Element => {
   }, [])
   const petRemains = (): JSX.Element => {
     return (
-      <PetSection title={'Ya no está conmigo'}>
+      <PetSection title={'Ya no está conmigo'} onToggle={() => console.log('death')}>
         <p className={styles.text.italic}>
           {'En esta sección puedes declarar el fallecimiento de tu mascota y dejarle un ' +
             'homenaje, o bien desactivarla porque ya no está bajo tu cuidado. Cuidado, estás acciones desactivarán '}
@@ -44,12 +44,12 @@ export const PetRecord = (): JSX.Element => {
   return (
     <div className={'flex flex-col py-3 px-6 mx-6 my-3 bg-white rounded-xl shadow-xl h-fit'}>
       <PetRecordMenu name={pet.name} isEnable={pet.is_enable} />
-      <PetIdentitySection pet={pet} />
-      <PetChipSection pet={pet} />
-      <PetDimensionSection pet={pet} />
-      <PetVaccinesSection pet={pet} />
-      <PetChronicsSection pet={pet} />
-      <PetOthersSection pet={pet} />
+      <PetIdentitySection pet={pet} pet_id={pet_id || ''} />
+      <PetChipSection pet={pet} pet_id={pet_id || ''} />
+      <PetDimensionSection pet={pet} pet_id={pet_id || ''} />
+      <PetVaccinesSection pet={pet} pet_id={pet_id || ''} />
+      <PetChronicsSection pet={pet} pet_id={pet_id || ''} />
+      <PetOthersSection pet={pet} pet_id={pet_id || ''} />
       {petRemains()}
     </div>
   )

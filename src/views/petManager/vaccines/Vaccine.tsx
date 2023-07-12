@@ -114,28 +114,28 @@ export const dummy = [
 
 export const Vaccine = (): JSX.Element => {
   return (
-    <div className={'border rounded-xl p-2 w-full'}>
+    <div className={'border rounded-xl p-2 w-full h-fit'}>
       <table className="w-full">
-        <thead className="bg-main-light text-white">
+        <thead className="bg-main text-white">
           <tr>
-            <th className="w-max-1/4 px-6 py-2 border">Mascota</th>
-            <th className="py-2 border">Contra la Rabia</th>
-            <th className="py-2 border">Contra el Echinococcus</th>
-            <th className="py-2 border">Otras Vacunas</th>
+            <th className="w-max-1/4 px-6 py-2">Mascota</th>
+            <th className="py-2">Contra la Rabia</th>
+            <th className="py-2">Contra el Echinococcus</th>
+            <th className="py-2">Otras Vacunas</th>
           </tr>
         </thead>
         <tbody>
           {dummy.map((p) => {
             return (
               <tr key={p.name}>
-                <th className="py-2 border text-md font-normal">{p.name}</th>
-                <th className="p-3 border">
+                <th className="py-2 border-b text-md font-normal">{p.name}</th>
+                <th className="p-3 border-b">
                   <PetVaccineCard name={p.raby.name} vaccine={p.raby} />
                 </th>
-                <th className="p-3 border">
+                <th className="p-3 border-b">
                   <PetVaccineCard name={p.echinococcus.name} vaccine={p.echinococcus} />
                 </th>
-                <th className="p-3 border">
+                <th className="p-3 border-b">
                   <PetVaccineCard name={p.others.name} vaccine={p.others} />
                 </th>
               </tr>

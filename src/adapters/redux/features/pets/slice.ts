@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { IPet } from '../../../../domain/entities/pets/IPet'
 import { IPetRegistry } from '../../../../domain/entities/pets/PetRegistry'
-import { createPet, getPetByID } from '../../thunks/pet'
+import { addChip, createPet, getPetByID } from '../../thunks/pet'
 import { IPetIdentificationOwner } from '../../../../domain/entities/pets/IPetIdentificationOwner'
 
 export type PetRegistryState = {
@@ -50,6 +50,16 @@ export const slice = createSlice({
       state.pet = action.payload
     })
     builder.addCase(getPetByID.rejected, (state) => {
+      console.log('here i am rejecting')
+    })
+    // ADD CHIP
+    builder.addCase(addChip.pending, (state) => {
+      console.log('here i am waiting')
+    })
+    builder.addCase(addChip.fulfilled, (state, action) => {
+      //state.pets.push(action.payload)
+    })
+    builder.addCase(addChip.rejected, (state) => {
       console.log('here i am rejecting')
     })
   },

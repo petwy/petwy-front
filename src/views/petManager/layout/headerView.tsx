@@ -1,47 +1,31 @@
-import React, { JSX } from 'react'
+import React, { JSX, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { IOwner } from '../../../domain/entities/owners/owner'
-import Breadcrumb from '../../../shared/components/breadcrumb/breadcrumb'
 import { Tooltip } from '../../../shared/components/loadingBar/toolTip/ToolTip'
 import { IconBackFilled } from '../../../shared/components/icons/iconBack/IconBackFilled'
 import { IconUserFilled } from '../../../shared/components/icons/iconUser/IconUserFilled'
 import { styles } from '../../../config/styles'
+import { useTitlePage } from '../../../shared/hooks/useTitlePage'
+import { ButtonBackFilled } from '../../../shared/components/buttons/back/ButtonBackFilled'
 
-export default function HeaderView(props: { title: string; owner: IOwner }): JSX.Element {
-  const { title } = props
+export default function HeaderView(): JSX.Element {
   const history = useNavigate()
+  const { handleTitlePage, titlePage, handleBack } = useTitlePage()
+  useEffect(() => {
+    if (!titlePage) handleTitlePage('Mis Mascotas')
+  }, [titlePage, handleTitlePage])
 
   return (
     <div className={'flex flex-col w-full gap-3 lg:p-3 border-b border-b-gray-light'}>
-      <Breadcrumb />
       <div className={'flex flex-row justify-between items-center'}>
         <Tooltip content={'Volver atrás'}>
-          <button
-            onClick={() => {
+          <ButtonBackFilled
+            onHandle={() => {
               history(-1)
+              handleBack()
             }}
-          >
-            <IconBackFilled size={styles.icon.size.md} color={'main'} />
-          </button>
+          />
         </Tooltip>
-
-        {/*<div className={''}>*/}
-        {/*  <Link to={'pets/new'}>*/}
-        {/*    <button*/}
-        {/*      onClick={toggle}*/}
-        {/*      className={*/}
-        {/*        'flex flex-row gap-3 w-full justify-center items-center py-3 px-6 border border-main rounded-xl'*/}
-        {/*      }*/}
-        {/*    >*/}
-        {/*      <Icon className={'text-2xl text-success'}>*/}
-        {/*        {' '}*/}
-        {/*        <IoMdAddCircle />*/}
-        {/*      </Icon>*/}
-        {/*      <p>Agregar mascota</p>*/}
-        {/*    </button>*/}
-        {/*  </Link>*/}
-        {/*</div>*/}
-        <h1 className={'title-main text-2xl'}>{title}</h1>
+        <h1 className={'title-main text-2xl'}>{titlePage}</h1>
         <Tooltip content={'Ver cuenta'}>
           <button
             onClick={() => {

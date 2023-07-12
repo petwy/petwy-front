@@ -15,7 +15,8 @@ export default {
     },
     pets: {
       pets: '/pets',
-      getByID: (ID: string): string => `/pets/${ID}`,
+      byID: (ID: string): string => `/pets/${ID}`,
+      chip: '/pets/chip',
     },
   },
   buildUrl: (url = '', path = '', queryParams = {}, hash = '', lowerCase = false, disableCSV = false): string => {

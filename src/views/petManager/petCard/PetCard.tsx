@@ -1,10 +1,14 @@
 import React, { JSX } from 'react'
-import { styles } from '../../../config/styles'
 import { Link } from 'react-router-dom'
 import { IPet } from '../../../domain/entities/pets/IPet'
-import { ageCalc } from '../../../shared/utils/ageCalc'
+import { ageCalc, dateViewer } from '../../../shared/utils/ageCalc'
 import { routes } from '../../../config/routes'
 import { PetCardHeader } from './PetCardHeader'
+import { useTitlePage } from '../../../shared/hooks/useTitlePage'
+import { toCapitalize } from '../../../shared/utils'
+import { speciesIcon } from '../../../shared/components/icons/species'
+import { ButtonWideOutline } from '../../../shared/components/buttons/wide/ButtonWideOutline'
+import { PawIcon } from '../../../shared/components/icons'
 
 export enum Severity {
   low = 'secondary',
@@ -20,13 +24,14 @@ export interface PetChronic {
 export default function PetCard(props: { pet: IPet }): JSX.Element {
   const {
     pet_id,
+    pet_type,
     sterilised,
     name: petName,
     avatar,
     is_alive,
     is_enable,
-    date_of_birth: birthDay,
-    pet_death: petDeath,
+    birth_date: birthDay,
+    death: petDeath,
     chronic_diseases,
     chip,
   } = props.pet
@@ -39,6 +44,8 @@ export default function PetCard(props: { pet: IPet }): JSX.Element {
   )
 
   const age = ageCalc(birthDay, is_alive, petDeath ? petDeath : undefined)
+  const deathAge = petDeath && `${dateViewer(birthDay)} - ${dateViewer(petDeath.death_date)}`
+  const { handleTitlePage } = useTitlePage()
   return (
     <div
       className={
@@ -51,17 +58,22 @@ export default function PetCard(props: { pet: IPet }): JSX.Element {
         <img src={avatar} alt={petName} className={'h-auto w-80'} />
       </div>
       <div className={'flex flex-col gap-3'}>
-        <h1 className={'text-3xl font-bold text-center title-main'}>{petName.toUpperCase()}</h1>
-        <p className={'text-center text-main-dark'}>{age}</p>
+        <div className={'flex flex-row justify-center gap-3 items-center'}>
+          <span className={'text-3xl'}>{speciesIcon[pet_type.specie]}</span>
+          <h1 className={'text-3xl font-bold text-center title-main'}>{petName.toUpperCase()}</h1>
+        </div>
+        <p className={'text-center text-main-dark'}>{is_alive ? age : deathAge}</p>
         <h3
           className={`text-center text-main-light italic mb-4 ${is_alive && is_enable ? 'text-success' : 'text-gray'}`}
         >
           {is_alive && is_enable ? 'activa' : 'siempre te amaremos'}
         </h3>
         <Link to={routes.owners.manager.pets.petID(pet_id)}>
-          <button className={`${styles.button.size.wide} ${styles.button.color.dark} ${styles.button.shape.rounded}`}>
-            Ver mas
-          </button>
+          <ButtonWideOutline
+            text={'Ver más'}
+            onHandle={() => handleTitlePage(toCapitalize(petName))}
+            iconType={<PawIcon />}
+          />
         </Link>
       </div>
     </div>

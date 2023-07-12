@@ -3,7 +3,7 @@ import Main from '../../router'
 
 function App(): JSX.Element {
   return (
-    <div className="bg-zinc-600 h-screen text-main font-monserrat">
+    <div className="bg-white h-screen text-main font-monserrat">
       <Main />
     </div>
   )

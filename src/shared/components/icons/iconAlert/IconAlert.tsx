@@ -1,13 +1,13 @@
 import React, { JSX } from 'react'
-import { IoAlertCircle } from 'react-icons/io5'
 import { IconButtonProps } from '../props'
 import { BaseIcon } from '../BaseIcon'
+import { AlertIcon } from '../index'
 
 export const IconAlertFilled = (props: IconButtonProps): JSX.Element => {
   const { size, color } = props
   return (
     <BaseIcon size={size} color={color}>
-      <IoAlertCircle />
+      <AlertIcon />
     </BaseIcon>
   )
 }

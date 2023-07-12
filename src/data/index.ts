@@ -1,11 +1,23 @@
 import { Specie } from '../domain/entities/specie'
 import { Option } from '../domain/interfaces/select'
+import { toCapitalize } from '../shared/utils'
+import { countries } from './geography'
+import { colours } from './colours'
 
-export const species: Array<Option> = Object.values(Specie).map((s) => ({
-  value: s,
-  label: s,
-  code: s,
-}))
+const specieArr: Record<string, string> = {
+  cat: 'felino',
+  dog: 'canino',
+}
+// export const species: Array<Option> = Object.values(specieArr).map((s, i) => ({
+//   value: s,
+//   label: toCapitalize(s),
+//   code: Object.keys(specieArr)[i].toUpperCase(),
+// }))
+
+export const species: Array<Option> = [
+  { code: 'CAT', value: 'felino', label: 'felino' },
+  { code: 'DOG', value: 'canino', label: 'canino' },
+]
 
 export const catBreeds: Array<Option> = [
   { code: 'DLH', value: 'Domestico Pelo Largo', label: 'Domestico Pelo Largo' },
@@ -217,13 +229,48 @@ export const dogBreeds: Array<Option> = [
   { value: 'Yorkshire Terrier', label: 'Yorkshire Terrier', code: 'YKT' },
 ]
 
-export const specieBreeds = (specie: string) => {
-  switch (specie) {
-    case Specie.CAT:
-      return catBreeds
-    case Specie.DOG:
-      return dogBreeds
-    default:
-      return dogBreeds
+export const specieBreeds = (specie: string): Array<Option> => {
+  if (!specie) return []
+  const breeds: Record<string, Array<Option>> = {
+    felino: catBreeds,
+    canino: dogBreeds,
   }
+
+  return breeds[specie]
+}
+
+export const sexOpts: Option[] = [
+  { value: 'male', label: 'macho', code: 'male' },
+  { value: 'female', label: 'hembra', code: 'female' },
+]
+
+export const unitWeightOpts: Option[] = [
+  { value: 'kilos', label: 'kilos', code: 'kgs' },
+  { value: 'gramos', label: 'gramos', code: 'grs' },
+]
+
+export function getLabel(value: string, field: string, ref?: string): string {
+  if (!value) return ''
+  switch (field) {
+    case `sex`:
+      return getLabelFromOptions(sexOpts, value)
+    case 'coat':
+      console.log('coat', value)
+      return value
+        .split(', ')
+        .map((c) => toCapitalize(getLabelFromOptions(colours, c)))
+        .join(', ')
+    case 'country':
+      return getLabelFromOptions(countries, value)
+    case 'breed':
+      return getLabelFromOptions(specieBreeds(ref || 'canino'), value)
+    case 'specie':
+      return getLabelFromOptions(species, value)
+    default:
+      return ''
+  }
+}
+
+function getLabelFromOptions(arr: Array<Option>, value: string): string {
+  return arr.filter((f) => f.value === value).map((m) => m.label)[0]
 }

@@ -70,7 +70,7 @@ export const StepTwo = (props: StepProps): JSX.Element => {
         <div className={styles['form-block'].normal}>
           <Label name="phone" text="Teléfono" />
           <div className="flex gap-5">
-            <Select name={'phone.code'} data={phoneCodes} />
+            <Select name={'phone.code'} options={phoneCodes} />
             <Field name={'phone.number'} placeholder={'99999999'} className={styles['input-box'].main} />
           </div>
           <ErrorMessage component={'a'} className={styles.text.error} name={'phone.number'} />

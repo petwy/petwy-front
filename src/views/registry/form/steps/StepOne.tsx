@@ -85,7 +85,7 @@ export const StepOne = (props: StepProps): JSX.Element => {
           <div className={styles['form-block'].normal}>
             <Label name={'identify'} text={'País de emisión de tu documento'} />
             <div>
-              <Select data={countries} name={`identification.${idType}.country`} />
+              <Select options={countries} name={`identification.${idType}.country`} />
             </div>
           </div>
           <Label name={'identify'} text={'Selecciona el tipo de identificación'} />

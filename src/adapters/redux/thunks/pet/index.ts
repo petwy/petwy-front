@@ -1,6 +1,7 @@
 import petRepository from '../../../web/repository/pet'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { PetRegistryState } from '../../features/pets/slice'
+import { IChipUpdate, IPetUpdate } from '../../../../domain/entities/pets/IPetUpdate'
 
 export const createPet = createAsyncThunk('pets/create', async (registry: PetRegistryState) => {
   const { id, pet } = registry
@@ -8,6 +9,13 @@ export const createPet = createAsyncThunk('pets/create', async (registry: PetReg
 })
 
 export const getPetByID = createAsyncThunk('pets/get', async (id: string) => {
-  console.log('here pet by id')
   return await petRepository.get(id)
+})
+
+export const patchPet = createAsyncThunk('pets/create', async (update: IPetUpdate) => {
+  return await petRepository.patch(update.pet_id, update)
+})
+
+export const addChip = createAsyncThunk('pets/add_chip', async (chip: IChipUpdate) => {
+  return await petRepository.addChip(chip)
 })

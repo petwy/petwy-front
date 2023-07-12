@@ -22,11 +22,11 @@ export default function OwnerManager(): JSX.Element {
   }, [])
 
   return (
-    <div className={'container flex flex-row gap-3 w-full px-3 py-2'}>
+    <div className={'flex flex-row gap-3 h-full w-full overflow-hidden'}>
       <AsideOwnerMenu owner_id={owner?.owner_id} />
       <div className={'flex flex-col gap-3 w-full'}>
-        <HeaderView owner={owner} title={'Mis Mascotas'} />
-        <div className={'flex h-full w-full px-3 py-2'}>
+        <HeaderView />
+        <div className={'flex h-full w-full px-3 py-2 overflow-y-auto overflow-x-hidden'}>
           <Outlet />
         </div>
       </div>

@@ -40,7 +40,7 @@ export const styles = {
   text: {
     'title-big': 'text-3xl font-bold',
     'main-title': 'text-2xl font-bold',
-    title: 'text-xl font-bold',
+    title: 'text-lg font-bold',
     error: 'text-error italic',
     italic: 'italic',
   },

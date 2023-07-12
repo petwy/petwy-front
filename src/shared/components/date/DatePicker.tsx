@@ -9,7 +9,6 @@ export const DatePickerField = (props: DatePickerProps): JSX.Element => {
   const { name } = props
   const [field, meta, helpers] = useField({ name })
   const [date, setDate] = useState<string>(initialDate)
-  console.log('date', date)
   useEffect(() => {
     helpers.setValue(moment(date).format())
   }, [helpers])

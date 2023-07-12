@@ -24,7 +24,7 @@ export const StepThree = (props: StepThreeProps): JSX.Element => {
         <Label name="address" text="Dirección actual" />
         <div className={styles['form-block'].normal}>
           <Label name={'address.country'} text={'País'} />
-          <Select name="address.country" data={countries} />
+          <Select name="address.country" options={countries} />
         </div>
         <div className={styles['form-block'].normal}>
           <Label name={'address.street'} text={'Calle'} />
@@ -47,7 +47,7 @@ export const StepThree = (props: StepThreeProps): JSX.Element => {
         </div>
         <div className={styles['form-block'].normal}>
           <Label name={'address.state'} text={'Estado, Provincia o Región'} />
-          <Select name={'address.state'} data={regions} />
+          <Select name={'address.state'} options={regions} />
         </div>
         <div className={styles['form-block'].normal}>
           <Label name="address.post_code" text="Código Postal" />

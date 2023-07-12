@@ -11,6 +11,5 @@ export const useBreadcrumbs = () => {
   const removeBreadCrumb = () => {
     setBreadcrumbs(breadCrumbs.splice(0, breadCrumbs.length - 1))
   }
-  console.log('useBreadcrumbs', breadCrumbs)
   return { breadCrumbs, addBreadCrumb, removeBreadCrumb }
 }

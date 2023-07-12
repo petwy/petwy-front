@@ -3,11 +3,11 @@ import { IconActiveFilled } from '../../../shared/components/icons/iconActive/Ic
 import moment from 'moment/moment'
 import { PetVaccineProps } from './props'
 import { styles } from '../../../config/styles'
-import { IconAlertFilled } from '../../../shared/components/icons/iconAlert/IconAlert'
+import { Tooltip } from '../../../shared/components/loadingBar/toolTip/ToolTip'
+import { ButtonUpdateVaccine } from '../../../shared/components/buttons/update/ButtonUpdateVaccine'
 
 export const PetVaccineCard = (props: PetVaccineProps): JSX.Element => {
   const { name, vaccine } = props
-  console.log('vaccine', JSON.stringify(vaccine))
   const applicationDate = vaccine?.vaccination_date ? vaccine.vaccination_date : null
   const expirationDate = vaccine?.valid_until ? vaccine.valid_until : null
   const isValidVaccine = (): boolean => {
@@ -18,11 +18,23 @@ export const PetVaccineCard = (props: PetVaccineProps): JSX.Element => {
       <div className={'flex flex-col gap-2 text-left'}>
         <div className={'flex flex-row gap-3 w-full'}>
           {isValidVaccine() ? (
-            <IconActiveFilled size={styles.icon.size.sm} color={'success'} />
+            <>
+              <IconActiveFilled size={styles.icon.size.sm} color={'success'} />
+              <h1 className={'font-bold text-md flex flex-row gap-3'}>{name} </h1>
+            </>
           ) : (
-            <IconAlertFilled size={styles.icon.size.sm} color={'error'} />
+            <>
+              <Tooltip content={'Actualiza su vacuna'}>
+                <ButtonUpdateVaccine
+                  size={'sm'}
+                  onHandle={() => {
+                    console.log('actualiza vacuna')
+                  }}
+                />
+              </Tooltip>
+              <h1 className={'font-bold text-md flex flex-row gap-3'}>{name} </h1>
+            </>
           )}
-          <h1 className={'font-bold text-md flex flex-row gap-3'}>{name} </h1>
         </div>
         <div className={'mx-9'}>
           {!isValidVaccine() ? (
