@@ -4,11 +4,12 @@ import { IPet } from '../../../domain/entities/pets/IPet'
 import { ageCalc, dateViewer } from '../../../shared/utils/ageCalc'
 import { routes } from '../../../config/routes'
 import { PetCardHeader } from './PetCardHeader'
-import { useTitlePage } from '../../../shared/hooks/useTitlePage'
+import { useAppMenu } from '../../../shared/hooks/useAppMenu'
 import { toCapitalize } from '../../../shared/utils'
 import { speciesIcon } from '../../../shared/components/icons/species'
 import { ButtonWideOutline } from '../../../shared/components/buttons/wide/ButtonWideOutline'
 import { PawIcon } from '../../../shared/components/icons'
+import { IBreadcrumb } from '../../../domain/components/appMenu/interfaces/IBreadcrumb'
 
 export enum Severity {
   low = 'secondary',
@@ -45,7 +46,17 @@ export default function PetCard(props: { pet: IPet }): JSX.Element {
 
   const age = ageCalc(birthDay, is_alive, petDeath ? petDeath : undefined)
   const deathAge = petDeath && `${dateViewer(birthDay)} - ${dateViewer(petDeath.death_date)}`
-  const { handleTitlePage } = useTitlePage()
+  const { handleTitlePage, handleBreadcrumbs } = useAppMenu()
+  const handleAppMenu = () => {
+    // const label = ''
+    // const link = ''
+    // const breadcrumbs: Array<IBreadcrumb> = [
+    //   { label: 'Home', link: routes.owners.manager.home(id) },
+    //   { label, link },
+    // ] : []
+    handleTitlePage(`Ficha de ${toCapitalize(petName)}`)
+    // handleBreadcrumbs(breadcrumbs)
+  }
   return (
     <div
       className={
@@ -74,11 +85,7 @@ export default function PetCard(props: { pet: IPet }): JSX.Element {
           {!(is_alive && is_enable) && 'siempre te amaremos'}
         </h3>
         <Link to={routes.owners.manager.pets.petID(pet_id)}>
-          <ButtonWideOutline
-            text={'Ver más'}
-            onHandle={() => handleTitlePage(toCapitalize(petName))}
-            iconType={<PawIcon />}
-          />
+          <ButtonWideOutline text={'Ver más'} onHandle={() => handleAppMenu()} iconType={<PawIcon />} />
         </Link>
       </div>
     </div>

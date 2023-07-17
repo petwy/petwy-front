@@ -12,6 +12,7 @@ import { ButtonAddPet } from '../../../shared/components/buttons/pet/ButtonAddPe
 import { Tooltip } from '../../../shared/components/loadingBar/toolTip/ToolTip'
 import { useNavigate } from 'react-router-dom'
 import { routes } from '../../../config/routes'
+import { useAppMenu } from '../../../shared/hooks/useAppMenu'
 
 export const OwnerHome = (): JSX.Element => {
   const { owner_id: id } = useParams()
@@ -19,8 +20,10 @@ export const OwnerHome = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>()
   const state = useSelector<AppState>((state: AppState) => state.ownerState)
   const { owner } = state as OwnerState
+  const { handleTitlePage } = useAppMenu()
 
   useEffect(() => {
+    handleTitlePage('Mis Mascotas')
     dispatch(getByOwnerID(id as string))
   }, [])
 

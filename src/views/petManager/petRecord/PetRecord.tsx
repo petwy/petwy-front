@@ -2,7 +2,6 @@ import React, { JSX, useEffect } from 'react'
 import { useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, AppState } from '../../../adapters/redux/store'
-import { PetState } from '../../../adapters/redux/features/pets/slice'
 import { getPetByID } from '../../../adapters/redux/thunks/pet'
 import { styles } from '../../../config/styles'
 import { PetSection } from './sections/PetSection'
@@ -21,7 +20,6 @@ export const PetRecord = (): JSX.Element => {
   const { pet_id } = useParams()
   const dispatch = useDispatch<AppDispatch>()
   const pet = useSelector<AppState>((state: AppState) => state.petState.pet) as IPet
-
   const btnStyle = `${styles.button.shape.rounded} ${styles.button.size.wide} ${styles.button.color.dark}`
 
   useEffect(() => {

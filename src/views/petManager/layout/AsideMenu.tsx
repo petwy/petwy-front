@@ -50,12 +50,12 @@ export function AsideOwnerMenu(props: { owner_id: string }): JSX.Element {
       <div className={'flex flex-col w-full gap-3 justify-center items-start p-3'}>
         <div className={'flex flex-col gap-3 w-full'}>
           {menu(owner_id).map((m) => (
-            <MenuItem link={m.link} key={m.label} Icon={m.icon} label={m.label} />
+            <MenuItem owner_id={owner_id} link={m.link} key={m.label} Icon={m.icon} label={m.label} />
           ))}
         </div>
         <div className={'flex flex-col gap-3'}>
           {settingMenu.map((m) => (
-            <MenuItem link={m.link} key={m.label} Icon={m.icon} label={m.label} />
+            <MenuItem owner_id={owner_id} link={m.link} key={m.label} Icon={m.icon} label={m.label} />
           ))}
         </div>
       </div>
