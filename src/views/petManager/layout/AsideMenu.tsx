@@ -61,6 +61,6 @@ export function AsideOwnerMenu(props: { owner_id: string }): JSX.Element {
       </div>
     </div>
   ) : (
-    <LoadingBar />
+    <LoadingBar location={''} message={'cargando...'} />
   )
 }

@@ -29,12 +29,10 @@ export class Http<T> implements Api<T> {
         timeout: config.request.timeout,
       })
       .then((response: AxiosResponse) => {
-        console.log(response)
         const { status, data } = response
         return { status, data }
       })
       .catch((err) => {
-        console.log(err)
         throw err
       })
   }

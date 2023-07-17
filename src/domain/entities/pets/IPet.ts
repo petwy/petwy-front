@@ -6,7 +6,7 @@ export interface IPet {
   name: string
   coat: string
   chip: {
-    chipped: boolean
+    is_chipped: boolean
     chip_code: string
     chip_date: Date
     location: string
@@ -32,6 +32,8 @@ export interface IPet {
     height: number
     width: number
     depth: number
+    weight: number
+    measure_weight_type: string
   }
   pet_weight: {
     weight: number

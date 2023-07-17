@@ -11,7 +11,7 @@ import {
   AiFillPrinter,
   AiOutlinePlus,
 } from 'react-icons/ai'
-import { BiRefresh, BiSupport } from 'react-icons/bi'
+import { BiSupport, BiChip } from 'react-icons/bi'
 import { BsCloudDownloadFill, BsFillBugFill } from 'react-icons/bs'
 import { FaMicrochip, FaPaw, FaPlane, FaUserAlt } from 'react-icons/fa'
 import { GiCat, GiSittingDog } from 'react-icons/gi'
@@ -31,7 +31,7 @@ export const ChronicIcon = AiFillWarning
 export const CloseIcon = AiOutlineClose
 export const DogIcon = GiSittingDog
 export const DownloadIcon = BsCloudDownloadFill
-export const ChipIcon = FaMicrochip
+export const ChipIcon = BiChip
 export const EditIcon = AiFillEdit
 export const HomeIcon = HiHome
 export const LoginIcon = AiOutlineLogin

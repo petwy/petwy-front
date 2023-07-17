@@ -22,3 +22,8 @@ export function ageCalc(birthDay: AppDate, isAlive: boolean, petDeath?: AppDate,
 export function dateViewer(date: AppDate): string {
   return moment(date).tz('America/Santiago').format('DD/MM/YYYY')
 }
+
+export function isBefore(date: AppDate): boolean {
+  const today = moment().tz('America/Santiago').toDate()
+  return moment(today).isBefore(date)
+}

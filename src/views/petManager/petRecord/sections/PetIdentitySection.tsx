@@ -8,6 +8,8 @@ import { styles } from '../../../../config/styles'
 import { ButtonCircleFilled } from '../../../../shared/components/buttons/circle/ButtonBackFilled'
 import { AiFillEdit } from 'react-icons/ai'
 import { getLabel } from '../../../../data'
+import { PetSection } from './PetSection'
+import { PetSectionLabel } from './PetSectionLabel'
 
 export const PetIdentitySection = (props: SectionProps): JSX.Element => {
   const { pet } = props
@@ -17,30 +19,29 @@ export const PetIdentitySection = (props: SectionProps): JSX.Element => {
   const sex = getLabel(pet.sex, 'sex')
   const residenceCountry = toCapitalize(getLabel(pet.country, 'country'))
   const coats = getLabel(pet.coat, 'coat')
+  const dateBirth = `${dateViewer(pet.birth_date)}, ${ageCalc(pet.birth_date, true, undefined, 'y')} de edad.`
   const petIdentityView = (): JSX.Element => {
     return (
-      <div className={'flex flex-col justify-between ml-3 mt-3'}>
-        <p>Especie: {specie}</p>
-        <p>Raza: {breed}</p>
-        <p>Sexo: {sex}</p>
-        <p>
-          Fecha de nacimiento: {dateViewer(pet.birth_date)}, {ageCalc(pet.birth_date, true, undefined, 'y')} de edad{' '}
-        </p>
-        <p>Color: {coats}</p>
-        <p>Esterilizado: {sterilised}</p>
-        <p>País de residencia: {residenceCountry}</p>
+      <div className={'flex flex-col justify-between ml-3'}>
+        <PetSectionLabel title={'Especie'} value={specie} />
+        <PetSectionLabel title={'Raza'} value={breed} />
+        <PetSectionLabel title={'Sexo'} value={sex} />
+        <PetSectionLabel title={'Fecha de Nacimiento'} value={dateBirth} />
+        <PetSectionLabel title={'Color'} value={coats} />
+        <PetSectionLabel title={'Esterilización'} value={sterilised} />
+        <PetSectionLabel title={'País de residencia'} value={residenceCountry} />
       </div>
     )
   }
   const petAvatarView = (): JSX.Element => {
     return (
-      <div className={'shadow-xl bg-white-abs rounded-xl flex flex-col justify-center items-center'}>
-        <img src={pet.avatar} alt={pet.name} className={'w-48 p-3 h-auto rounded-xl'} />
+      <div className={'shadow-xl bg-white-abs rounded-xl flex flex-col justify-center items-center p-3 gap-1'}>
+        <img src={pet.avatar} alt={pet.name} className={'w-56 h-auto'} />
         <Tooltip content={`Cambia el avatar de ${pet.name}`}>
           <ButtonCircleFilled
             size={'sm'}
             onHandle={function (): void {
-              console.log('Function not implemented.')
+              return
             }}
             iconType={<AiFillEdit />}
           />
@@ -49,9 +50,17 @@ export const PetIdentitySection = (props: SectionProps): JSX.Element => {
     )
   }
   return (
-    <div className={'flex flex-row justify-between gap-3 py-3'}>
-      {petIdentityView()}
-      {petAvatarView()}
-    </div>
+    <PetSection
+      title={'Identificación'}
+      isEditable={false}
+      onToggle={() => {
+        return
+      }}
+    >
+      <div className={'flex flex-row gap-3 justify-between items-center'}>
+        {petIdentityView()}
+        {petAvatarView()}
+      </div>
+    </PetSection>
   )
 }

@@ -33,7 +33,7 @@ export const PetRecordMenu = (props: MenuPetProps): JSX.Element => {
 
   const petName = (): JSX.Element => {
     return (
-      <div className={'flex flex-row gap-2 items-center'}>
+      <div className={'flex flex-row gap-2 pb-6 items-center'}>
         {isEnable ? (
           <Tooltip content={'Tu mascota está activa'}>
             <IconActiveFilled size={styles.icon.size.sm} color={'success'} />

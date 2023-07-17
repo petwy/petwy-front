@@ -1,39 +1,44 @@
-import React, { JSX, useEffect } from 'react'
+import React, { JSX, useEffect, useState } from 'react'
 import { SectionProps } from './props'
 import { PetSection } from './PetSection'
 import { dateViewer } from '../../../../shared/utils/ageCalc'
 import { useShowing } from '../../../../shared/hooks/useShowing'
-import { ErrorMessage, Field, Form, Formik, FormikProps } from 'formik'
-import { IPetChip } from '../../../../domain/entities/pets/IChip'
-import { Label } from '../../../../shared/components/label'
-import { Select } from '../../../../shared/components/select/Select'
+import { ErrorMessage, Form, Formik, FormikProps } from 'formik'
+import { Select } from '../../../../shared/components/Select'
 import { countries } from '../../../../data/geography'
 import { styles } from '../../../../config/styles'
-import { DatePickerField } from '../../../../shared/components/date/DatePicker'
-import { IPet } from '../../../../domain/entities/pets/IPet'
+import { DatePickerField } from '../../../../shared/components/DatePicker'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, AppState } from '../../../../adapters/redux/store'
 import { addChip, getPetByID } from '../../../../adapters/redux/thunks/pet'
-import { PetState } from '../../../../adapters/redux/features/pets/slice'
-import { IChipUpdate, IPetUpdate } from '../../../../domain/entities/pets/IPetUpdate'
+import { IChipUpdate } from '../../../../domain/entities/pets/IPetUpdate'
+import { TextField } from '../../../../shared/components/TextField'
+import { toCapitalize } from '../../../../shared/utils'
+import { getLabel } from '../../../../data'
+import { IPet } from '../../../../domain/entities/pets/IPet'
+import { IPetChip } from '../../../../domain/entities/pets/IChip'
+import { PetSectionLabel } from './PetSectionLabel'
+
+function validate(chip: IPetChip): boolean {
+  return !chip?.chip_code || chip?.chip_code.trim() === ''
+}
 
 export const PetChipSection = (props: SectionProps): JSX.Element => {
   const { pet_id } = props
   const dispatch = useDispatch<AppDispatch>()
-  const state = useSelector<AppState>((state: AppState) => state)
-  const { petState } = state as AppState
-  const { pet } = petState as PetState
+  const pet = useSelector<AppState>((state: AppState) => state.petState.pet) as IPet
+  const [isEditable, setEditable] = useState<boolean>(true)
   const { isShowing, toggle } = useShowing()
+  const chippedCountry = toCapitalize(getLabel(pet.chip?.location, 'country'))
+
   const initialChip: IChipUpdate = {
     pet_id,
-    chip_code: '',
-    chip_date: new Date(),
-    location: '',
+    chip_code: pet.chip?.chip_code,
+    chip_date: pet.chip?.chip_date,
+    location: pet.chip?.location,
   }
   useEffect(() => {
-    if (pet_id !== undefined) {
-      dispatch(getPetByID(pet_id))
-    }
+    dispatch(getPetByID(pet_id))
   }, [])
   const onSubmit = (chip: IChipUpdate) => {
     const { chip_code, location, chip_date } = chip
@@ -45,10 +50,11 @@ export const PetChipSection = (props: SectionProps): JSX.Element => {
     }
     dispatch(addChip(update))
     toggle()
+    dispatch(getPetByID(pet_id))
   }
 
   return (
-    <PetSection title={'Información del Chip'} onToggle={toggle}>
+    <PetSection title={'Información del Chip'} onToggle={toggle} isEditable={isEditable}>
       {isShowing ? (
         <div className={'transition-opacity ease-in duration-1000'}>
           <Formik initialValues={initialChip} onSubmit={onSubmit}>
@@ -60,16 +66,27 @@ export const PetChipSection = (props: SectionProps): JSX.Element => {
                     <div className={'flex flex-col gap-3'}>
                       <div className={`flex gap-3 items-start`}>
                         <div className={'w-full flex flex-col gap-3'}>
-                          <Label name={'chip_code'} text={'Número de chip'} />
-                          <Field name={'chip_code'} className={styles['input-box'].main} placeholder={'9000508090'} />
+                          <TextField
+                            type={'text'}
+                            labelText={'Número de chip'}
+                            placeholder={'9000508090'}
+                            name={'chip_code'}
+                          />
                         </div>
                         <div className={'w-full flex flex-col gap-3 items-start'}>
-                          <Label name={'location'} text={'País de instalación'} />
-                          <Select options={countries} name={'location'} className={styles['input-box'].main} />
+                          <Select
+                            options={countries}
+                            name={'location'}
+                            className={styles['input-box'].main}
+                            labelText={'País de instalación'}
+                          />
                         </div>
                         <div className={'w-full flex flex-col gap-3'}>
-                          <Label name={'chip_date'} text={'Fecha de Instalación'} />
-                          <DatePickerField name={'chip_date'} className={styles['input-box'].main} />
+                          <DatePickerField
+                            name={'chip_date'}
+                            className={styles['input-box'].main}
+                            labelText={'Fecha de Instalación'}
+                          />
                         </div>
                       </div>
                       <ErrorMessage component={'a'} className={`w-full ${styles.text.error}`} name={'chip_code'} />
@@ -100,10 +117,10 @@ export const PetChipSection = (props: SectionProps): JSX.Element => {
         </div>
       ) : (
         <>
-          <p>Código del chip: {pet.chip?.chip_code}</p>
-          <p>Fecha de instalación: {pet.chip ? dateViewer(pet.chip?.chip_date) : null}</p>
-          <p>Ubicación del chip: Lomo</p>
-          <p>País de instalación: {pet.chip?.location}</p>
+          <PetSectionLabel title={'Código del chip'} value={pet?.chip?.chip_code} />
+          <PetSectionLabel title={'Fecha de instalación'} value={pet?.chip ? dateViewer(pet?.chip?.chip_date) : ''} />
+          <PetSectionLabel title={'Ubicación del chip'} value={'Lomo'} />
+          <PetSectionLabel title={'País de instalación'} value={chippedCountry} />
         </>
       )}
     </PetSection>

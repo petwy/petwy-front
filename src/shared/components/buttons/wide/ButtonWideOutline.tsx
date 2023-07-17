@@ -1,6 +1,10 @@
 import React, { JSX, ReactNode } from 'react'
 
-export const ButtonWideOutline = (props: { text: string; onHandle: () => void; iconType?: ReactNode }): JSX.Element => {
+export const ButtonWideOutline = (props: {
+  text: string
+  onHandle?: () => void
+  iconType?: ReactNode
+}): JSX.Element => {
   const { text, onHandle, iconType } = props
   return (
     <button

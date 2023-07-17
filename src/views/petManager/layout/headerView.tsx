@@ -1,7 +1,6 @@
-import React, { JSX, useEffect, useState } from 'react'
+import React, { JSX, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Tooltip } from '../../../shared/components/loadingBar/toolTip/ToolTip'
-import { IconBackFilled } from '../../../shared/components/icons/iconBack/IconBackFilled'
 import { IconUserFilled } from '../../../shared/components/icons/iconUser/IconUserFilled'
 import { styles } from '../../../config/styles'
 import { useTitlePage } from '../../../shared/hooks/useTitlePage'
@@ -15,7 +14,7 @@ export default function HeaderView(): JSX.Element {
   }, [titlePage, handleTitlePage])
 
   return (
-    <div className={'flex flex-col w-full gap-3 lg:p-3 border-b border-b-gray-light'}>
+    <div className={'container flex flex-col w-full gap-3 border-b border-b-gray-light py-6'}>
       <div className={'flex flex-row justify-between items-center'}>
         <Tooltip content={'Volver atrás'}>
           <ButtonBackFilled

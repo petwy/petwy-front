@@ -255,7 +255,6 @@ export function getLabel(value: string, field: string, ref?: string): string {
     case `sex`:
       return getLabelFromOptions(sexOpts, value)
     case 'coat':
-      console.log('coat', value)
       return value
         .split(', ')
         .map((c) => toCapitalize(getLabelFromOptions(colours, c)))

@@ -28,7 +28,7 @@ export const PetVaccineCard = (props: PetVaccineProps): JSX.Element => {
                 <ButtonUpdateVaccine
                   size={'sm'}
                   onHandle={() => {
-                    console.log('actualiza vacuna')
+                    return
                   }}
                 />
               </Tooltip>

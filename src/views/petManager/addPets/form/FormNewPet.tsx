@@ -2,16 +2,15 @@ import React, { JSX, useEffect, useState } from 'react'
 import { getLabel, sexOpts, specieBreeds, species } from '../../../../data'
 import { countries } from '../../../../data/geography'
 import { colours } from '../../../../data/colours'
-import { Label } from '../../../../shared/components/label'
-import { Select } from '../../../../shared/components/select/Select'
+import { Select } from '../../../../shared/components/Select'
 import { IPetRegistry } from '../../../../domain/entities/pets/PetRegistry'
 import { FormNewPetProps } from './props'
-import { ErrorMessage, Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
+import { ErrorMessage, Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import { Option } from '../../../../domain/interfaces/select'
 import { styles } from '../../../../config/styles'
-import { DatePickerField } from '../../../../shared/components/date/DatePicker'
-import { MultiSelect } from '../../../../shared/components/multiSelect/MultiSelect'
-import { SwitchField } from '../../../../shared/components/switch/Switch'
+import { DatePickerField } from '../../../../shared/components/DatePicker'
+import { CoatSelect } from '../../../../shared/components/CoatSelect'
+import { SwitchField } from '../../../../shared/components/Switch'
 import { petRegistrySchema } from '../../../../shared/validation/schema/petRegistry'
 import { toCapitalize } from '../../../../shared/utils'
 import {
@@ -24,6 +23,31 @@ import { createPet } from '../../../../adapters/redux/thunks/pet'
 import { PetRegistryState } from '../../../../adapters/redux/features/pets/slice'
 import { LoadingBar } from '../../../../shared/components/loadingBar/LoadingBar'
 import { routes } from '../../../../config/routes'
+import {
+  BUTTON_CREATE_PET,
+  CHIP_COUNTRY,
+  CHIP_DATE,
+  CHIP_NUMBER,
+  CHIP_NUMBER_PLACEHOLDER,
+  CHIP_TEXT,
+  CREATING_PET_LOADING,
+  OBTAINED_FROM_PLACEHOLDER,
+  OBTAINED_FROM_TEXT,
+  OTHERS_PLACEHOLDER,
+  OTHERS_TEXT,
+  PET_BIRTH_DATE_LABEL_TEXT,
+  PET_BREED_LABEL_TEXT,
+  PET_COAT_LABEL_TEXT,
+  PET_COAT_LABEL_TEXT_HELPER,
+  PET_NAME_PLACEHOLDER,
+  PET_NAME_TEXT,
+  PET_SPECIE,
+  RESIDENCE_ADVISE,
+  RESIDENCE_ADVISE_HELPER,
+  RESIDENCE_LABEL_TEXT,
+  STERILISE_TEXT,
+} from './texts'
+import { TextField } from '../../../../shared/components/TextField'
 
 const initialState: IPetRegistry = {
   owner_id: '',
@@ -82,12 +106,16 @@ export const FormNewPet = (props: FormNewPetProps): JSX.Element | null => {
         }
 
         return (
-          <Form className={'w-full'}>
+          <Form className={'container w-full'}>
             <div className={'flex flex-col gap-3 px-6 py-3'}>
               {isCountryChanged ? (
                 <div className={'w-full flex flex-col gap-3 items-start'}>
-                  <Label name={'country'} text={'País de residencia'} />
-                  <Select options={countries} name={'country'} className={styles['input-box'].main} />
+                  <Select
+                    options={countries}
+                    name={'country'}
+                    className={styles['input-box'].main}
+                    labelText={RESIDENCE_LABEL_TEXT}
+                  />
                 </div>
               ) : (
                 <div
@@ -95,40 +123,43 @@ export const FormNewPet = (props: FormNewPetProps): JSX.Element | null => {
                     'flex flex-col gap-3 justify-center text-center items-center bg-main-light bg-opacity-20 rounded-xl p-9'
                   }
                 >
-                  <Label
-                    name={'country'}
-                    text={`Tu mascota será creada con residencia en ${toCapitalize(
-                      getLabel(values.country, 'country')
-                    )}. ¿Deseas cambiar su residencia?`}
+                  <SwitchField
+                    name={'isCountryChanged'}
+                    title={RESIDENCE_ADVISE(toCapitalize(getLabel(values.country, 'country')))}
+                    textHelper={RESIDENCE_ADVISE_HELPER}
                   />
-                  <SwitchField name={'isCountryChanged'} />
                 </div>
               )}
               <div className={'flex flex-row items-center justify-center'}>
                 <div className={'flex w-1/2 justify-center items-center gap-3 px-3 py-2'}>
-                  <Label name={'sterilised'} text={'¿Está esterilizado?'} />
-                  <SwitchField name={'sterilised'} />
+                  <SwitchField name={'sterilised'} title={STERILISE_TEXT} />
                 </div>
                 {/* CHIP */}
                 <div className={'flex w-1/2 justify-center items-center gap-3 px-3 py-2'}>
-                  <Label name={'is_chipped'} text={'¿Tiene microchip?'} />
-                  <SwitchField name={'is_chipped'} />
+                  <SwitchField name={'is_chipped'} title={CHIP_TEXT} />
                 </div>
               </div>
               {is_chipped ? (
                 <div className={'flex flex-col gap-3'}>
                   <div className={`flex gap-3 items-start`}>
                     <div className={'w-full flex flex-col gap-3'}>
-                      <Label name={'chip.chip_code'} text={'Número de chip'} />
-                      <Field name={'chip.chip_code'} className={styles['input-box'].main} placeholder={'9000508090'} />
+                      <TextField
+                        name={'chip.chip_code'}
+                        labelText={CHIP_NUMBER}
+                        placeholder={CHIP_NUMBER_PLACEHOLDER}
+                        type={'number'}
+                      />
                     </div>
                     <div className={'w-full flex flex-col gap-3 items-start'}>
-                      <Label name={'chip.location'} text={'País de instalación'} />
-                      <Select options={countries} name={'chip.location'} className={styles['input-box'].main} />
+                      <Select
+                        options={countries}
+                        name={'chip.location'}
+                        className={styles['input-box'].main}
+                        labelText={CHIP_COUNTRY}
+                      />
                     </div>
                     <div className={'w-full flex flex-col gap-3'}>
-                      <Label name={'chip.chip_date'} text={'Fecha de Instalación'} />
-                      <DatePickerField name={'chip.chip_date'} className={styles['input-box'].main} />
+                      <DatePickerField name={'chip.chip_date'} labelText={CHIP_DATE} />
                     </div>
                   </div>
                   <ErrorMessage component={'a'} className={`w-full ${styles.text.error}`} name={'chip.chip_code'} />
@@ -136,23 +167,17 @@ export const FormNewPet = (props: FormNewPetProps): JSX.Element | null => {
               ) : null}
 
               <div className={'w-full flex flex-col gap-3'}>
-                <Label name={'name'} text={'Nombre de tu mascota'} />
-                <Field name={'name'} className={styles['input-box'].main} placeholder={'Kiara'} />
-                {touched.name && errors.name && (
-                  <ErrorMessage component={'a'} className={styles.text.error} name={'name'} />
-                )}
+                <TextField type={'text'} name={'name'} labelText={PET_NAME_TEXT} placeholder={PET_NAME_PLACEHOLDER} />
               </div>
               <div className={'flex flex-row gap-3'}>
                 <div className={'w-full flex flex-col gap-3'}>
-                  <Label name={'sex'} text={'Sexo'} />
-                  <Select options={sexOpts} name={'sex'} />
+                  <Select options={sexOpts} name={'sex'} labelText={'Sexo'} />
                   {touched.sex && errors.sex && (
                     <ErrorMessage component={'a'} className={styles.text.error} name={'sex'} />
                   )}
                 </div>
                 <div className={'w-full flex flex-col gap-3'}>
-                  <Label name={'birth_date'} text={'Fecha de Nacimiento'} />
-                  <DatePickerField name={'birth_date'} className={styles['input-box'].main} />
+                  <DatePickerField name={'birth_date'} labelText={PET_BIRTH_DATE_LABEL_TEXT} />
                   {touched.birth_date && errors.birth_date && (
                     <ErrorMessage component={'a'} className={styles.text.error} name={'birth_date'} />
                   )}
@@ -161,15 +186,13 @@ export const FormNewPet = (props: FormNewPetProps): JSX.Element | null => {
 
               <div className={'flex flex-row gap-3'}>
                 <div className={'flex flex-col gap-3 w-full'}>
-                  <Label name={'specie'} text={'Especie'} />
-                  <Select name={'specie'} options={species} />
+                  <Select name={'specie'} options={species} labelText={PET_SPECIE} />
                   {touched.specie && errors.specie && (
                     <ErrorMessage component={'a'} className={styles.text.error} name={'specie'} />
                   )}
                 </div>
                 <div className={'flex flex-col gap-3 w-full'}>
-                  <Label name={'breed'} text={'Raza'} />
-                  <Select key={'breed'} options={specieSelect} name={'breed'} />
+                  <Select key={'breed'} options={specieSelect} name={'breed'} labelText={PET_BREED_LABEL_TEXT} />
                   {touched.breed && errors.breed && (
                     <ErrorMessage component={'a'} className={styles.text.error} name={'breed'} />
                   )}
@@ -177,25 +200,27 @@ export const FormNewPet = (props: FormNewPetProps): JSX.Element | null => {
               </div>
 
               <div className={'flex flex-col gap-3 w-full'}>
-                <Label name={'coat'} text={'Color'} />
-                <p>Selecciona los colores de tu mascota. Para eliminar un color, solo haz click encima del botón.</p>
-                <MultiSelect data={colours} name={'coat'} />
+                <CoatSelect
+                  labelText={PET_COAT_LABEL_TEXT}
+                  options={colours}
+                  name={'coat'}
+                  textHelper={PET_COAT_LABEL_TEXT_HELPER}
+                />
                 {touched.coat && errors.coat && (
                   <ErrorMessage component={'a'} className={styles.text.error} name={'coat'} />
                 )}
               </div>
 
               <div className={'flex flex-col gap-3'}>
-                <Label name={'obtained_from'} text={'¿Cómo lo obtuviste?'} />
-                <Field name={'obtained_from'} className={styles['input-box'].main} placeholder={'Adopción'} />
+                <TextField
+                  type={'text'}
+                  name={'obtained_from'}
+                  labelText={OBTAINED_FROM_TEXT}
+                  placeholder={OBTAINED_FROM_PLACEHOLDER}
+                />
               </div>
               <div className={'flex flex-col gap-3'}>
-                <Label name={'others'} text={'¿Quieres adicionar algo más?'} />
-                <Field
-                  name={'others'}
-                  className={styles['input-box'].main}
-                  placeholder={'Lo que quieras comentar de tu mascota'}
-                />
+                <TextField type={'text'} name={'others'} labelText={OTHERS_TEXT} placeholder={OTHERS_PLACEHOLDER} />
               </div>
               <div className={'mt-3'}>
                 <button
@@ -212,7 +237,7 @@ export const FormNewPet = (props: FormNewPetProps): JSX.Element | null => {
                   `
                   }`}
                 >
-                  Crear Ficha
+                  {BUTTON_CREATE_PET}
                 </button>
               </div>
             </div>
@@ -221,6 +246,6 @@ export const FormNewPet = (props: FormNewPetProps): JSX.Element | null => {
       }}
     </Formik>
   ) : (
-    <LoadingBar location={routes.owners.manager.home(owner.owner_id)} message={`Creando a ${newPetName}...`} />
+    <LoadingBar location={routes.owners.manager.home(owner.owner_id)} message={CREATING_PET_LOADING(newPetName)} />
   )
 }

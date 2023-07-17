@@ -18,10 +18,6 @@ export interface IPetUpdate {
   is_alive?: boolean
   is_enable?: boolean
   avatar?: string
-  height?: string
-  width?: string
-  weight?: string
-  weight_unit?: string
   obtained_from?: string
   country?: string
   other?: string
@@ -31,10 +27,8 @@ export interface IPetUpdate {
     height?: number
     width?: number
     depth?: number
-  }
-  pet_weight?: {
     weight?: number
-    measure_type?: string
+    measure_weight_type?: string
   }
   death?: {
     death_date?: Date

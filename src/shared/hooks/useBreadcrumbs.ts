@@ -3,7 +3,6 @@ import { useState } from 'react'
 
 export const useBreadcrumbs = () => {
   const [breadCrumbs, setBreadcrumbs] = useState<Array<IBreadcrumb>>([])
-  console.log('render', breadCrumbs)
 
   const addBreadCrumb = (next: IBreadcrumb) => {
     setBreadcrumbs([...breadCrumbs, next])

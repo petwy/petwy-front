@@ -8,7 +8,6 @@ import { toCapitalize } from '../../../shared/utils'
 
 export const PetAntiparasiticCard = (props: PetVaccineProps): JSX.Element => {
   const { name, vaccine } = props
-  console.log('vaccine', JSON.stringify(vaccine))
   const applicationDate = vaccine?.vaccination_date ? vaccine.vaccination_date : null
   const expirationDate = vaccine?.valid_until ? vaccine.valid_until : null
   const isValidAntiparasitic = (): boolean => {

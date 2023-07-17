@@ -52,7 +52,12 @@ export default function PetCard(props: { pet: IPet }): JSX.Element {
         'flex flex-col gap-3 w-full items-between justify-center px-3 py-2 bg-white border border-gray-light rounded-xl shadow-xl'
       }
     >
-      <PetCardHeader chronics={chronics} isSterilised={sterilised} isChipped={!!chip} />
+      <PetCardHeader
+        isActive={is_alive && is_enable}
+        chronics={chronics}
+        isSterilised={sterilised}
+        isChipped={!!chip}
+      />
       {/* Body PetCard */}
       <div className={'flex flex-col justify-center items-center'}>
         <img src={avatar} alt={petName} className={'h-auto w-80'} />
@@ -66,7 +71,7 @@ export default function PetCard(props: { pet: IPet }): JSX.Element {
         <h3
           className={`text-center text-main-light italic mb-4 ${is_alive && is_enable ? 'text-success' : 'text-gray'}`}
         >
-          {is_alive && is_enable ? 'activa' : 'siempre te amaremos'}
+          {!(is_alive && is_enable) && 'siempre te amaremos'}
         </h3>
         <Link to={routes.owners.manager.pets.petID(pet_id)}>
           <ButtonWideOutline

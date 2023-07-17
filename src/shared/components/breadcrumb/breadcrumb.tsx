@@ -7,7 +7,6 @@ export default function Breadcrumb(): JSX.Element {
   const { breadCrumbs } = useBreadcrumbs()
   const [breads, setBreads] = useState<Array<IBreadcrumb>>([])
   useEffect(() => {
-    console.log('show breadcrumbs', breadCrumbs)
     setBreads(breadCrumbs)
   }, [])
   return (

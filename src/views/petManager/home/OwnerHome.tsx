@@ -57,7 +57,7 @@ export const OwnerHome = (): JSX.Element => {
   )
 
   return (
-    <div className={'flex flex-col gap-6'}>
+    <div className={'container flex flex-col gap-6'}>
       <div className={'flex flex-col'}>{petAlive()}</div>
       <div className={'flex flex-col'}>{petRemain()}</div>)
     </div>

@@ -1,6 +1,6 @@
 import React, { JSX } from 'react'
 import { Label } from '../../../../shared/components/label'
-import { Select } from '../../../../shared/components/select/Select'
+import { Select } from '../../../../shared/components/Select'
 import { IEvent } from '../../../../domain/components/appMenu/interfaces/IEvent'
 import { StepThreeProps } from './props'
 import { styles } from '../../../../config/styles'

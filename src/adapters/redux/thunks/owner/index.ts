@@ -19,9 +19,7 @@ export const createOwner = createAsyncThunk(
 
 export const getByOwnerID = createAsyncThunk(sliceNames.getByOwnerID, async (id: string, thunkAPI): Promise<IOwner> => {
   try {
-    const response = await ownerRepository.getByOwnerID(id)
-    console.log('owner', response)
-    return response
+    return await ownerRepository.getByOwnerID(id)
   } catch (e) {
     thunkAPI.rejectWithValue('error occurred')
     throw e

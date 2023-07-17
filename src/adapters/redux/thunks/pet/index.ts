@@ -12,7 +12,7 @@ export const getPetByID = createAsyncThunk('pets/get', async (id: string) => {
   return await petRepository.get(id)
 })
 
-export const patchPet = createAsyncThunk('pets/create', async (update: IPetUpdate) => {
+export const patchPet = createAsyncThunk('pets/patch', async (update: IPetUpdate) => {
   return await petRepository.patch(update.pet_id, update)
 })
 

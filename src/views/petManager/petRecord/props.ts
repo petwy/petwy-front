@@ -9,5 +9,6 @@ export interface MenuPetProps extends Baseprop {
 export interface PetSectionProps extends Baseprop {
   title: string
   children: ReactNode
+  isEditable: boolean
   onToggle: () => void
 }

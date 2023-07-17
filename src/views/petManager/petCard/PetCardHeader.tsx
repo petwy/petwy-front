@@ -5,11 +5,24 @@ import { Level } from '../../../shared/components/tag/props'
 import { Tooltip } from '../../../shared/components/loadingBar/toolTip/ToolTip'
 import { IconSterilisedFilled } from '../../../shared/components/icons/iconSterilised/IconSterilisedFilled'
 import { IconChipFilled } from '../../../shared/components/icons/iconChip/IconChipFilled'
-import { PetCardHeaderProps } from './props'
 import { styles } from '../../../config/styles'
+import { PetChronic } from './PetCard'
+import { ActiveIcon } from '../../../shared/components/icons'
+import { IconActiveFilled } from '../../../shared/components/icons/iconActive/IconActiveFilled'
 
-export const PetCardHeader = (props: PetCardHeaderProps): JSX.Element => {
-  const { chronics, isSterilised, isChipped } = props
+interface PetCardHeaderProps {
+  isActive: boolean
+  isSterilised: boolean
+  isChipped: boolean
+  chronics: Array<PetChronic>
+}
+
+export const PetCardHeader: React.FC<PetCardHeaderProps> = ({
+  isActive,
+  chronics,
+  isSterilised,
+  isChipped,
+}): JSX.Element => {
   const petIconsView = (): JSX.Element => {
     return (
       <div className={'flex flex-row gap-2'}>
@@ -20,7 +33,7 @@ export const PetCardHeader = (props: PetCardHeaderProps): JSX.Element => {
         ) : null}
         {isChipped ? (
           <Tooltip content={'Tu mascota tiene microchip'}>
-            <IconChipFilled size={styles.icon.size.sm} color={'main-light'} />
+            <IconChipFilled size={styles.icon.size.sm} color={'success'} />
           </Tooltip>
         ) : null}
       </div>
@@ -28,8 +41,14 @@ export const PetCardHeader = (props: PetCardHeaderProps): JSX.Element => {
   }
   return (
     <div className={'flex flex-row gap-3 justify-between items-center'}>
-      {petIconsView()}
-
+      <div className={'flex flex-row gap-2 items-center'}>
+        {isActive ? (
+          <Tooltip content={'Tu mascota está activa'}>
+            <IconActiveFilled size={'w-6 h-6'} color={'success'} />
+          </Tooltip>
+        ) : null}
+        {petIconsView()}
+      </div>
       <div className={'flex flex-row gap-2'}>
         {chronics ? (
           chronics.map((c) => (

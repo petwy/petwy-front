@@ -13,13 +13,15 @@ import { PetChronicsSection } from './sections/PetChronicsSection'
 import { PetVaccinesSection } from './sections/PetVaccinesSection'
 import { PetDimensionSection } from './sections/PetDimensionSection'
 import { PetOthersSection } from './sections/PetOthersSection'
+import { IPet } from '../../../domain/entities/pets/IPet'
+import { PetSterilisedSection } from './sections/PetSterilisedSection'
+import { PetAntiparasiticSection } from './sections/PetAntiparasiticSection'
 
 export const PetRecord = (): JSX.Element => {
   const { pet_id } = useParams()
   const dispatch = useDispatch<AppDispatch>()
-  const state = useSelector<AppState>((state: AppState) => state)
-  const { petState } = state as AppState
-  const { pet } = petState as PetState
+  const pet = useSelector<AppState>((state: AppState) => state.petState.pet) as IPet
+
   const btnStyle = `${styles.button.shape.rounded} ${styles.button.size.wide} ${styles.button.color.dark}`
 
   useEffect(() => {
@@ -29,7 +31,7 @@ export const PetRecord = (): JSX.Element => {
   }, [])
   const petRemains = (): JSX.Element => {
     return (
-      <PetSection title={'Ya no está conmigo'} onToggle={() => console.log('death')}>
+      <PetSection title={'Ya no está conmigo'} onToggle={() => console.log('death')} isEditable={false}>
         <p className={styles.text.italic}>
           {'En esta sección puedes declarar el fallecimiento de tu mascota y dejarle un ' +
             'homenaje, o bien desactivarla porque ya no está bajo tu cuidado. Cuidado, estás acciones desactivarán '}
@@ -42,15 +44,17 @@ export const PetRecord = (): JSX.Element => {
     )
   }
   return (
-    <div className={'flex flex-col py-3 px-6 mx-6 my-3 bg-white rounded-xl shadow-xl h-fit'}>
+    <div className={'container flex flex-col py-3 px-6 mx-6 my-3 bg-white rounded-xl shadow-xl w-full h-fit'}>
       <PetRecordMenu name={pet.name} isEnable={pet.is_enable} />
       <PetIdentitySection pet={pet} pet_id={pet_id || ''} />
       <PetChipSection pet={pet} pet_id={pet_id || ''} />
+      {!pet.sterilised ? <PetSterilisedSection pet={pet} pet_id={pet_id || ''} /> : null}
       <PetDimensionSection pet={pet} pet_id={pet_id || ''} />
+      <PetAntiparasiticSection pet={pet} pet_id={pet_id || ''} />
       <PetVaccinesSection pet={pet} pet_id={pet_id || ''} />
       <PetChronicsSection pet={pet} pet_id={pet_id || ''} />
       <PetOthersSection pet={pet} pet_id={pet_id || ''} />
-      {petRemains()}
+      {/*{petRemains()}*/}
     </div>
   )
 }
