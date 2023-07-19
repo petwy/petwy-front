@@ -1,7 +1,7 @@
 /*
  * This is a hardcoded references to regions in Chile
  * */
-import { Option } from '../../domain/interfaces/select'
+import { Option } from '../../domain/interfaces/IOption'
 
 export const countries: Array<Option> = [
   { code: 'CHL', value: 'CHL', label: 'Chile' },

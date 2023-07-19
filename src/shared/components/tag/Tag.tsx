@@ -7,7 +7,7 @@ export const Tag = (props: TagProps): JSX.Element => {
   return (
     <div
       className={`${className ? className : styleDefault} ${
-        level !== undefined ? level : Level.NONE
+        level !== undefined ? Level[level] : Level.none
       } w-fit px-3 py-1 rounded-2xl text-xs`}
     >
       {label}

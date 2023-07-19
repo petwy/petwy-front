@@ -1,5 +1,5 @@
 import React, { JSX, useState } from 'react'
-import { Option } from '../../../domain/interfaces/select'
+import { Option } from '../../../domain/interfaces/IOption'
 import { useField } from 'formik'
 import { Baseprop } from '../../../domain/interfaces/baseprop'
 import { BaseField } from '../BaseField'

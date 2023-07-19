@@ -32,6 +32,16 @@ export class OwnerRepository implements OwnerCrud {
     )
     return response.data
   }
+
+  async getAll(): Promise<Array<IOwner>> {
+    const headers = {}
+    const response = await this.repository.get<Array<IOwner>>(
+      build.buildUrl(build.urls.core, build.path.owners.getAll),
+      headers,
+      config.api.core.token
+    )
+    return response.data
+  }
 }
 
 const ownerRepository: OwnerRepository = new OwnerRepository()

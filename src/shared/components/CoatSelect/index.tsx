@@ -1,6 +1,6 @@
 import React, { JSX, useEffect, useState } from 'react'
 import { useField } from 'formik'
-import { Option } from '../../../domain/interfaces/select'
+import { Option } from '../../../domain/interfaces/IOption'
 import { styles } from '../../../config/styles'
 import { Baseprop } from '../../../domain/interfaces/baseprop'
 import { CustomSelect } from '../Select/CustomSelect'

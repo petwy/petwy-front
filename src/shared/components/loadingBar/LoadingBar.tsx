@@ -2,7 +2,7 @@ import React, { JSX, useEffect, useState } from 'react'
 import { FaPaw } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 
-export const LoadingBar = (props: { location: string; message: string }): JSX.Element => {
+export const LoadingBar = (props: { location?: string; message?: string }): JSX.Element => {
   const { location, message } = props
   const navigate = useNavigate()
   const [isVisible, setIsVisible] = useState<boolean>(true)

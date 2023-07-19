@@ -6,7 +6,7 @@ export const ButtonBackFilled = (props: { onHandle: () => void }): JSX.Element =
   return (
     <button
       onClick={onHandle}
-      className={`rounded-full text-sm py-2 px-2 text-main-dark border border-main-dark
+      className={`rounded-full text-sm py-2 px-2 text-main-dark border border-main-dark w-fit
       hover:text-white
       hover:bg-main
       transition

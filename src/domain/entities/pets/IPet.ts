@@ -19,10 +19,6 @@ export interface IPet {
   is_alive: boolean
   is_enable: boolean
   avatar: string
-  height: string
-  width: string
-  weight: string
-  weight_unit: string
   obtained_from: string
   country: string
   other: string
@@ -35,13 +31,11 @@ export interface IPet {
     weight: number
     measure_weight_type: string
   }
-  pet_weight: {
-    weight: number
-    measure_type: string
-  }
-  death: {
-    death_date: Date
-  }
+  death:
+    | {
+        death_date: Date
+      }
+    | undefined
   chronic_diseases: Array<Disease>
   rabies_vaccines: Array<IVaccine>
   anti_echinococcus: Array<IVaccine>

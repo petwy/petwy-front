@@ -1,14 +1,18 @@
 import React, { JSX } from 'react'
-import { useShowing } from '../../../shared/hooks/useShowing'
 import { ButtonRegistry } from '../../../shared/components/buttons/registy/ButtonRegistry'
-import { LoginView } from '../../login/LoginView'
-import { OwnerRegistryView } from '../../registry/OwnerRegistry'
+import { Login } from '../../Login'
+import { OwnerRegistryView } from '../../Registry'
 import { ButtonLoginOutline } from '../../../shared/components/buttons/login/ButtonLoginOutline'
 import { Link } from 'react-router-dom'
+import { modalShowService } from '../../../shared/channels/modal'
 
 export function PublicHomeDesktop(): JSX.Element {
-  const { isShowing: isShowingLoginModal, toggle: setLoginModal } = useShowing()
-  const { isShowing: isShowingRegistryModal, toggle: setRegistryModal } = useShowing()
+  const handleShowLogin = () => {
+    modalShowService.setSubjectManager(true)
+  }
+  const handleShowRegister = () => {
+    modalShowService.setSubjectManager(true)
+  }
   return (
     <section>
       <div className={'absolute grid grid-cols-2 gap-3 h-screen h-max-screen w-screen'}>
@@ -17,15 +21,10 @@ export function PublicHomeDesktop(): JSX.Element {
         </div>
         <div className={'container h-full flex flex-col'}>
           <div className={'flex justify-end py-12 px-3 mr-20 '}>
-            <Link to={`/owner/bfbf8916-7e5b-4695-9c67-e4a24e3eee16`}>
-              <ButtonLoginOutline
-                text={'Ingresa'}
-                onHandle={() => {
-                  // setLoginModal()
-                }}
-              />
+            <Link to={`/owner/62aaaa64-0fd8-4031-ae85-5e6b8d216298`}>
+              <ButtonLoginOutline text={'Ingresa'} onHandle={handleShowLogin} />
             </Link>
-            <LoginView show={isShowingLoginModal} hide={setLoginModal} />
+            <Login />
           </div>
           <div className={'h-full flex flex-col justify-center items-center gap-6'}>
             <div className={'flex flex-col gap-3'}>
@@ -36,8 +35,8 @@ export function PublicHomeDesktop(): JSX.Element {
               <p className={'text-xl font-light'}>{'Regístra tu mascota y te ayudaremos a organizar su cuidado'}</p>
             </div>
             <div className={'mt-9'}>
-              <ButtonRegistry text={'Comienza ahora'} onHandle={setRegistryModal} />
-              <OwnerRegistryView show={isShowingRegistryModal} hide={setRegistryModal} />
+              <ButtonRegistry text={'Comienza ahora'} onHandle={handleShowRegister} />
+              <OwnerRegistryView />
             </div>
           </div>
         </div>

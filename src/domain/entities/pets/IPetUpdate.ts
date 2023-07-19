@@ -44,6 +44,7 @@ export interface IPetUpdate {
 export interface IDiseaseUpdate {
   name?: string
   severity?: string
+  detail?: string
   treatment?: Array<Treatment>
 }
 

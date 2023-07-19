@@ -1,46 +1,57 @@
-import React, { createContext, JSX, useContext, useState } from 'react'
-import { IBreadcrumb } from '../../domain/components/appMenu/interfaces/IBreadcrumb'
+import React, { createContext, useState } from 'react'
+import { IBreadcrumb } from '../../domain/interfaces/IBreadcrumb'
 
 const MY_PETS = 'Mis Mascotas'
 
-interface ContextProps {
+interface IAppMenuContext {
   titlePage: string
   breadcrumbs: Array<IBreadcrumb>
-  handleTitlePage: (value: string) => void
-  handleBreadcrumbs: (value: Array<IBreadcrumb>) => void
+  setTitlePage: (value: string) => void
+  addBreadcrumbs: (value: Array<IBreadcrumb>) => void
+  getBreadcrumbs: () => Array<IBreadcrumb>
 }
 
-export const AppContext = createContext<ContextProps>({
+const defaultState = {
   titlePage: '',
   breadcrumbs: [],
-  handleBreadcrumbs: () => {
+  setTitlePage: (value: string) => {
     return
   },
-  handleTitlePage: () => {
+  addBreadcrumbs: (next: Array<IBreadcrumb>) => {
     return
   },
-})
+  getBreadcrumbs: (): Array<IBreadcrumb> => {
+    return []
+  },
+}
 
-export const AppMenuProvider = (props: { children: React.ReactNode }): JSX.Element => {
+export const AppMenuContext = createContext<IAppMenuContext>(defaultState)
+
+export const AppMenuProvider = (props: { children: React.ReactNode }) => {
   const { children } = props
   const [titlePage, setTitlePage] = useState<string>(MY_PETS)
   const [breadcrumbs, setBreadcrumbs] = useState<Array<IBreadcrumb>>([])
-  const handleTitlePage = (value: string) => {
-    if (value === 'Home') {
-      value = MY_PETS
-    }
-    setTitlePage(value)
-  }
 
-  const handleBreadcrumbs = (next: Array<IBreadcrumb>) => {
-    setBreadcrumbs(next)
+  const addBreadcrumbs = (value: Array<IBreadcrumb>) => {
+    localStorage.setItem('breadcrumbs', JSON.stringify(value))
+    setBreadcrumbs(value)
   }
-
+  const getBreadcrumbs = (): Array<IBreadcrumb> => {
+    const localStorageBreadcrumbs = localStorage.getItem('breadcrumbs')
+    if (localStorageBreadcrumbs) setBreadcrumbs(JSON.parse(localStorageBreadcrumbs))
+    return breadcrumbs
+  }
   return (
-    <AppContext.Provider value={{ titlePage, breadcrumbs, handleBreadcrumbs, handleTitlePage }}>
+    <AppMenuContext.Provider value={{ titlePage, breadcrumbs, getBreadcrumbs, setTitlePage, addBreadcrumbs }}>
       {children}
-    </AppContext.Provider>
+    </AppMenuContext.Provider>
   )
 }
 
-export const useAppMenu = (): ContextProps => useContext(AppContext)
+export const useAppMenu = (): IAppMenuContext => {
+  const ctx = React.useContext(AppMenuContext)
+  if (!ctx) {
+    throw new Error('No context available')
+  }
+  return ctx
+}

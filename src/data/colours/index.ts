@@ -1,4 +1,4 @@
-import { Option } from '../../domain/interfaces/select'
+import { Option } from '../../domain/interfaces/IOption'
 
 export const colours: Array<Option> = [
   { code: 'BLA', value: 'black', label: 'negro' },

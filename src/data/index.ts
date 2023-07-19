@@ -1,5 +1,5 @@
 import { Specie } from '../domain/entities/specie'
-import { Option } from '../domain/interfaces/select'
+import { Option } from '../domain/interfaces/IOption'
 import { toCapitalize } from '../shared/utils'
 import { countries } from './geography'
 import { colours } from './colours'

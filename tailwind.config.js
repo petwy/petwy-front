@@ -19,6 +19,7 @@ module.exports = {
       error: '#e23c4e',
       'error-light': '#ff595e',
       warning: '#EEC643',
+      'warning-light': '#F2DB55',
       success: '#7ca982',
       white: '#F1F2F6',
       'white-light': '#F7F2F9',

@@ -1,7 +1,7 @@
 import React, { Fragment, JSX } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { PawIcon } from '../icons'
-import { Option } from '../../../domain/interfaces/select'
+import { Option } from '../../../domain/interfaces/IOption'
 
 interface CustomSelect {
   options: Array<Option>
