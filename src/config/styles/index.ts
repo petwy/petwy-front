@@ -1,9 +1,9 @@
 const coats: Record<string, string> = {
-  white: 'bg-white text-gray-dark',
+  white: 'bg-white-abs text-gray-dark',
   black: 'bg-gray-dark text-white',
   gray: 'bg-gray text-white',
-  orange: 'bg-[#FFA500] text-gray-dark',
-  cream: 'bg-[#FFFDD0] text-gray-dark',
+  orange: 'bg-[#FFA500] text-white',
+  cream: 'bg-[#F9E4B7] text-white-abs',
   brown: 'bg-[#964B00] text-white',
 }
 export const styles = {
@@ -40,7 +40,7 @@ export const styles = {
   text: {
     'title-big': 'text-3xl font-bold',
     'main-title': 'text-2xl font-bold',
-    title: 'text-xl font-bold',
+    title: 'text-lg font-bold',
     error: 'text-error italic',
     italic: 'italic',
   },

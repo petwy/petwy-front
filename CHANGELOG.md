@@ -5,16 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.0.0] - 2023-05-30
+## [1.0.1] - 2023-07-27
+<span style="color:#FFF;background-color:#2FD0DE; padding:3px 9px; border-radius: 10px">CHANGED</span>
+
+- refactor domain interfaces
+
+## [1.0.0] - 2023-07-20
 
 <span style="color:#FFF;background-color:#64B6AC; padding:3px 9px; border-radius: 10px">ADDED</span>
 
+- add pet records view
 - add owners manager view
+- add owner home
 - add registry new owner view
+- add login view
 - add a public home view
 - add router to project
+- setup event subject
+- setup context for app menu
 - setup redux owners
-- create api consumer agnostic
+- create api consumer
 
 ### Changes Status Available
 

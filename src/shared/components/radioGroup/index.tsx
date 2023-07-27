@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import classNames from 'classnames'
-import { PawIcon } from '../icons/pawIcon'
+import { FaPaw } from 'react-icons/fa'
 import { RadioGroupProps } from './props'
 
 export type RadioGroupOption<T> = {
@@ -33,7 +33,7 @@ export const RadioButtonGroup = <T,>(props: RadioGroupProps<T>) => {
                     <span className="w-5 h-5">
                       {checked ? (
                         <span>
-                          <PawIcon />️
+                          <FaPaw />️
                         </span>
                       ) : null}
                     </span>

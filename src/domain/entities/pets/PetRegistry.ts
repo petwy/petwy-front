@@ -5,7 +5,7 @@ export interface IPetRegistry {
   owner_id: string
   name: string
   country: string
-  date_of_birth: Date
+  birth_date: Date
   sex: string
   coat: string
   specie: string

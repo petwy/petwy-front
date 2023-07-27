@@ -4,7 +4,7 @@ import { messages } from './messages'
 export const petRegistrySchema = yup.object({
   name: yup.string().required(messages.required),
   country: yup.string().required(messages.required),
-  birth_date: yup.date().required(messages.required),
+  birth_date: yup.date().nonNullable().required(messages.required),
   sex: yup.string().required(messages.required),
   coat: yup.string().required(messages.required),
   specie: yup.string().required(messages.required),

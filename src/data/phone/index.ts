@@ -1,6 +1,6 @@
-import { Country } from '../../domain/entities/country'
+import { Option } from '../../domain/interfaces/IOption'
 
-export const phoneCodes: Country[] = [
+export const phoneCodes: Option[] = [
   // América del Sur
   { code: 'CHL', label: '🇨🇱 +56', value: '+56' },
   { code: 'ARG', label: '🇦🇷 +54', value: '+54' },

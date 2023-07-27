@@ -14,19 +14,20 @@ module.exports = {
     },
     colors: {
       main: '#474973',
-      'main-light': '#787CC2',
-      'main-dark': '#3D3E61',
-      secondary: '#2FD0DE',
-      error: '#FA5435',
-      'error-light': '#F9917F',
+      'main-light': '#a69cac',
+      'main-dark': '#161b33',
+      error: '#e23c4e',
+      'error-light': '#ff595e',
       warning: '#EEC643',
-      success: '#64B6AC',
-      white: '#F9F9F9',
+      'warning-light': '#F2DB55',
+      success: '#7ca982',
+      white: '#F1F2F6',
       'white-light': '#F7F2F9',
       'white-abs': '#FFFFFF',
       'gray-dark': '#4D4D4D',
       gray: '#737373',
       'gray-light': '#B3B3B3',
+      black: '#241909',
     },
     fontFamily: {
       monserrat: ['Monserrat', 'sans-serif'],
@@ -42,7 +43,24 @@ module.exports = {
       borderRadius: {
         '4xl': '2rem',
       },
+      keyframes: {
+        blink: {
+          '0%, 100%': { opacity: 0 },
+          '50%': { opacity: 1 },
+        },
+      },
+      animation: {
+        blink: 'blink 1s infinite',
+      },
     },
   },
   plugins: [],
 }
+
+/* colores
+ * A9AFD1
+ * C2CAE8
+ * ADA9B7
+ * success 88D498 64B6AC
+ * magnolia F7F0F5
+ *  */
