@@ -1,4 +1,4 @@
-import { Treatment } from '../treatment'
+import { ITreatment } from '../ITreatment'
 
 export interface IPetUpdate {
   pet_id: string
@@ -45,7 +45,7 @@ export interface IDiseaseUpdate {
   name?: string
   severity?: string
   detail?: string
-  treatment?: Array<Treatment>
+  treatment?: Array<ITreatment>
 }
 
 export interface IVaccineUpdate {

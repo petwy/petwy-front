@@ -1,4 +1,4 @@
-export interface Treatment {
+export interface ITreatment {
   name: string
   dose: string
   from: Date

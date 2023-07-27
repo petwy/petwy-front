@@ -1,4 +1,4 @@
-import { Disease } from '../disease'
+import { IDisease } from '../IDisease'
 import { IVaccine } from '../IVaccine'
 
 export interface IPet {
@@ -31,15 +31,17 @@ export interface IPet {
     weight: number
     measure_weight_type: string
   }
-  death:
-    | {
-        death_date: Date
-      }
-    | undefined
-  chronic_diseases: Array<Disease>
+  death: IPetDeath | undefined
+  chronic_diseases: Array<IDisease>
   rabies_vaccines: Array<IVaccine>
   anti_echinococcus: Array<IVaccine>
   anti_parasitic: Array<IVaccine>
   others_vaccines: Array<IVaccine>
-  diseases: Array<Disease>
+  diseases: Array<IDisease>
+}
+
+export interface IPetDeath {
+  death_date: Date
+  remain: string
+  reason: string
 }
