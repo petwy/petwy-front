@@ -77,7 +77,7 @@ export default function PetCard(props: { pet: IPet }): JSX.Element {
         <h3
           className={`text-center text-main-light italic mb-4 ${is_alive && is_enable ? 'text-success' : 'text-gray'}`}
         >
-          {!(is_alive && is_enable) && 'siempre te amaremos'}
+          {!(is_alive && is_enable) && (petDeath?.remain || 'Siempre te amaremos')}
         </h3>
         <Link to={routes.owners.manager.pets.petID(pet_id)}>
           <ButtonWideOutline text={'Ver más'} onHandle={() => handleAppMenu()} iconType={<PawIcon />} />
