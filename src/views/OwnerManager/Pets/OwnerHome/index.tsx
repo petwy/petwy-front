@@ -64,9 +64,7 @@ export const OwnerHome = (): JSX.Element => {
           <h1 className={styles.text.title}>Mis Recuerdos</h1>
           <div className={'alive grid grid-cols-3 gap-3 w-full justify-center items-start'}>
             {owner.pets &&
-              owner.pets
-                ?.filter((p: IPet) => !p.is_alive && !p.is_enable)
-                .map((p: IPet) => <PetCard key={p.name} pet={p} />)}
+              owner.pets?.filter((p: IPet) => !p.is_alive).map((p: IPet) => <PetCard key={p.name} pet={p} />)}
           </div>
         </>
       ) : null}

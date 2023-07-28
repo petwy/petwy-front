@@ -32,6 +32,8 @@ export interface IPetUpdate {
   }
   death?: {
     death_date?: Date
+    reason?: string
+    remain?: string
   }
   chronic_diseases?: Array<IDiseaseUpdate>
   rabies_vaccines?: Array<IVaccineUpdate>

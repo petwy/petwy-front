@@ -11,4 +11,5 @@ export interface PetSectionProps extends Baseprop {
   children: ReactNode
   isEditable: boolean
   onToggle: () => void
+  titleColor?: 'main' | 'success' | 'error'
 }
